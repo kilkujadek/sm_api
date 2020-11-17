@@ -17,7 +17,13 @@
             value-field="surveyID"
             text-field="surveyName"
           />
-        </label>
+        </label> 
+        <b-button
+          @click="getSurveys"
+          variant="outline-dark"
+        >
+          Load surveys
+        </b-button>
       </b-form>
 
       <b-card
@@ -220,9 +226,7 @@ export default {
 			selectedSurvey: null
 		}
 	},
-	created() {
-		this.getSurveys()
-	},
+ 
 	computed: {
 		allCredentialsSet() {
 			if (this.userID == null) return false
@@ -249,7 +253,7 @@ export default {
 				'take': 20,
 				'skip': 0
 			}
-			axios.post('https://.surveymechanics.com/api/surveys', JSON.stringify(requestBody))
+			axios.post('https://surveymechanics.com/api/surveys', JSON.stringify(requestBody))
 				.then(({data}) => {
 					data.data.surveys.forEach((x) => {
 						that.surveys.push(x)
@@ -275,7 +279,7 @@ export default {
 				'surveyID': that.selectedSurvey
 			}
 			if (that.isSandbox) requestBody.sandbox = true
-			axios.post('https://.surveymechanics.com/api/invitations', JSON.stringify(requestBody))
+			axios.post('https://surveymechanics.com/api/invitations', JSON.stringify(requestBody))
 				.then(({data}) => {
 					that.res1 = data
 					that.req1 = requestBody
@@ -300,7 +304,7 @@ export default {
 				'skip': 0
 			}
 			
-			axios.post('https://.surveymechanics.com/api/invitations', JSON.stringify(requestBody))
+			axios.post('https://surveymechanics.com/api/invitations', JSON.stringify(requestBody))
 				.then(({data}) => {
 					that.res2 = data
 					that.req2 = requestBody
